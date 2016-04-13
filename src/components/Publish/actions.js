@@ -37,7 +37,7 @@ class publishingActions {
                             tags.path = file.path;
                             tags.type = type;
                             tags.size = CommonUtil.formatBytes(size);
-                            this.actions.addedFiles(tags);
+                            this.addedFiles(tags);
                             process.nextTick(next);
                         })
                         .catch(err => {
@@ -58,11 +58,11 @@ class publishingActions {
                             };
 
                             if (type === 'cover-art') {
-                                this.actions.setCover(fileSt);
+                                this.setCover(fileSt);
                                 fileSt.type = 'extra';
                             }
 
-                            this.actions.addedFiles(fileSt);
+                            this.addedFiles(fileSt);
                             process.nextTick(next);
                         })
                         .catch(err => {
@@ -85,7 +85,7 @@ class publishingActions {
             case 'youtube':
                 require('./utils/youtubeUtil').getAuthorization()
                     .then(() => {
-                        this.actions.getContent('youtube');
+                        this.getContent('youtube');
                     });
                 break;
         }

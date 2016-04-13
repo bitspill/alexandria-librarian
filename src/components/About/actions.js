@@ -16,13 +16,13 @@ class AboutActions {
     getLicense() {
         request('https://raw.githubusercontent.com/dloa/alexandria-librarian/master/LICENSE.md', (error, response, body) => {
             if (!error && response.statusCode == 200 && body)
-                this.actions.got({
+                this.got({
                     license: body
                 });
             else
                 fs.readFile(path.join(__dirname, '../../../../', 'LICENSE.md'), (err, data) => {
                     if (err) return console.error(err);
-                    this.actions.got({
+                    this.got({
                         license: data
                     });
                 });
@@ -43,7 +43,7 @@ class AboutActions {
                     };
                     contributors.push(person);
                 });
-                this.actions.got({
+                this.got({
                     contributors: contributors
                 });
             } else {
@@ -59,7 +59,7 @@ class AboutActions {
                         };
                         contributors.push(person);
                     });
-                    this.actions.got({
+                    this.got({
                         contributors: contributors
                     });
                 });
@@ -69,7 +69,7 @@ class AboutActions {
 
     getVersion() {
         let packageJson = require('../../../../package.json');
-        this.actions.got({
+        this.got({
             appInfo: {
                 version: packageJson.version,
                 releaseName: packageJson['relese-name']

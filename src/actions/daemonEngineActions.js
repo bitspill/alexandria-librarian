@@ -47,7 +47,7 @@ class daemonEngineActions {
                                 args: ['daemon']
                             });
                         else
-                            this.actions.ipfs('install');
+                            this.ipfs('install');
                     });
                 break;
             case 'disable':
@@ -55,11 +55,11 @@ class daemonEngineActions {
                 break;
             case 'pinned-total':
                 IPFSUtil.refreshStats(true)
-                    .then(this.actions.update);
+                    .then(this.update);
                 break;
             case 'refresh-stats':
                 IPFSUtil.refreshStats()
-                    .then(this.actions.update)
+                    .then(this.update)
                     .catch(err => {
                         if (err)
                             console.error(err)
@@ -69,7 +69,7 @@ class daemonEngineActions {
                 DaemonUtil.install({
                     id: 'ipfs',
                     args: ['init']
-                }).then(this.actions.ipfs.bind(this, 'enable')).catch(err => {
+                }).then(this.ipfs.bind(this, 'enable')).catch(err => {
                     if (err)
                         console.error(err)
                 });
@@ -89,7 +89,7 @@ class daemonEngineActions {
                                 args: ['-printtoconsole']
                             });
                         else
-                            this.actions.florincoind('install');
+                            this.florincoind('install');
                     });
                 break;
             case 'disable':
@@ -99,7 +99,7 @@ class daemonEngineActions {
                 DaemonUtil.install({
                         id: 'florincoind'
                     })
-                    .then(() => this.actions.florincoind('enable'))
+                    .then(() => this.florincoind('enable'))
                     .catch(console.error);
                 break;
         }
@@ -133,7 +133,7 @@ class daemonEngineActions {
             case 'install':
                 DaemonUtil.install({
                         id: 'libraryd'
-                    }).then(this.actions.libraryd.bind(this, 'enable'))
+                    }).then(this.libraryd.bind(this, 'enable'))
                     .catch(console.error);
                 break;
         }

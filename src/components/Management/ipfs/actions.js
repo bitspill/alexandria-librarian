@@ -34,7 +34,7 @@ class Actions {
                         .spread((hash, size) => {
                             IPFSUtil.pinHash(hash.Hash).then(res => {
                                 _.defer(() => {
-                                    this.actions.pined({
+                                    this.pined({
                                         name: path.basename(file),
                                         hash: res,
                                         size: CommonUtil.formatBytes(size.toFixed(3), 2)
@@ -63,7 +63,7 @@ class Actions {
                 .spread((hash, size) => {
                     IPFSUtil.pinHash(hash.Hash).then(res => {
                         _.defer(() => {
-                            this.actions.pined({
+                            this.pined({
                                 name: path.basename(url),
                                 hash: res,
                                 size: CommonUtil.formatBytes(size.toFixed(3), 2)
@@ -80,7 +80,7 @@ class Actions {
             Promise.all([IPFSUtil.pinHash(url), IPFSUtil.getHashsSize([url])])
                 .spread((hash, size) => {
                     _.defer(() => {
-                        this.actions.pined({
+                        this.pined({
                             name: path.basename(url),
                             hash: hash,
                             size: size
@@ -94,8 +94,8 @@ class Actions {
 
     loadLocalDB() {
         CommonUtil.readJson(pinnedJson)
-            .then(data => this.actions.loadedDB(data))
-            .catch(e => this.actions.loadedDB({}));
+            .then(data => this.loadedDB(data))
+            .catch(e => this.loadedDB({}));
         return false
     }
 
